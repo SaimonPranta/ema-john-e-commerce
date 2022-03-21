@@ -1,0 +1,30 @@
+.porduct-container{
+    display: flex;
+    border-bottom:1px solid lightgray;
+}
+.image{
+    width: 30%;
+}
+.image img{
+    width: 95%;
+    height: 100%;
+    
+}
+.product-details{
+    width: 70%;
+}
+/* .porduct-container p{
+    margin: 2px;
+}
+.porduct-container h5{
+    margin:10px;
+} */
+
+.porduct-container button{
+    background-color: yellow;
+    border:1px solid lightgray;
+    border-radius:4px;
+    width:150px;
+    line-height: 18px;
+    margin: 20px 0 10px 0;
+}
