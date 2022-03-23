@@ -1,4 +1,4 @@
-.shop-conatiner{
+.tween-conatiner{
     display: flex;
     max-width:1180px;
     margin:auto;
@@ -9,5 +9,6 @@
     border-right: 1px solid lightgray;
 }
 .cart-container{
+    margin-left:12px;
     width: 30%;
 }

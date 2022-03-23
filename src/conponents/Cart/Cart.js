@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { getStoredCart } from '../../New folder/utilities/fakedb';
+import { clearTheCart, getStoredCart } from '../../New folder/utilities/fakedb';
 import './Cart.css';
-import fakeData from '../../New folder/fakeData/products.json';
+import { NavLink } from 'react-router-dom';
 
 
-const Cart = () => {
+
+
+const Cart = (props) => {
     const [carts, setCarts] = useState({});
+
+    const porduct = props.product;
+    const keyss = Object.keys(carts);
+
     let finalProducts = [];
     let totalPrice = 0;
     let shiping = 0;
@@ -17,26 +23,16 @@ const Cart = () => {
         
     },[]);
 
-    // const product = keys.map(key => {
-    //     const product = fakeData.find(pd => pd.key === key)
-    //     product.quantity = carts[key];
-    //     return product
-    // })
-    // setFakeproducts(product)
-
-
-    
-    
 
     function numberHandler(num){
         const pureNumber = num.toFixed(2);
         return pureNumber;
     };
 
-    const keyss = Object.keys(carts);
+    
     
     const products = keyss.map(key => {
-        const newProduct = fakeData.find(pd => pd.key === key)
+        const newProduct = porduct.find(pd => pd.key === key)
         newProduct['quantity'] = carts[key];
         return newProduct;
     });
@@ -61,10 +57,11 @@ if(200 < totalPrice){
 
 const beforTex = totalPrice + shiping;
 const tex = beforTex * .10 ;
-    
-  
 
-    
+const orderHandeler = () =>{
+    clearTheCart();
+}
+  
     return (
         <div className='cart'>
             <h3>Order Summary</h3>
@@ -74,6 +71,14 @@ const tex = beforTex * .10 ;
             <p>Total before tax: ${numberHandler(beforTex)}</p>
             <p>Estimate Tax: ${numberHandler(tex)}</p>
             <h4>Order Total: ${numberHandler(totalPrice + shiping + beforTex + tex)}</h4>
+
+            {
+                props.buttonHandeler || products.length > 0 && <NavLink className="nav-control" to="/review"> <button className="button-control">Order Review</button> </NavLink>
+            }
+            {
+                products.length > 0 && props.buttonHandeler && <NavLink className="nav-control" to="/orderImage"> <button onClick={orderHandeler} className="button-control">Place Order</button> </NavLink>
+            }
+
         </div>
     );
 };
